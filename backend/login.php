@@ -23,12 +23,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['user_id'] = $row['id'];
         $_SESSION['username'] = $row['username'];
         $_SESSION['isadmin'] = $row['isadmin'];
-        header('Location: ../index.php');
+        echo"<script>history.go(-1);</script>";  
         exit();
     }
 } else {
     if(isset($_SESSION['user_id'])) {
-        header('Location: ../index.php');
+        echo"<script>history.go(-1);</script>";  
     }
 }
 ?>
@@ -91,7 +91,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                                 <input type="submit" value="Log In" class="btn btn-block btn-primary">
 
-                                <span class="d-block text-left my-4 text-muted">&mdash; or register &mdash;</span>
+                                <span class="d-block text-left my-4 text-muted" style="float: right;"><a href="/backend/register.php">&mdash; or register &mdash;</a></span>
+                                
                             </form>
                         </div>
                     </div>

@@ -74,5 +74,35 @@
                 ));
             }
         }
-    }
+    } else if($_SERVER['REQUEST_METHOD'] == 'POST' && !isset($_SESSION["id"])) {
+        $username = get_post_param('username', '');
+        $password = get_post_param('password', '');
+        $action = get_post_param('action', '');
+
+        if($action == "add_user") {
+            $pdo = get_pdo();
+            $res = $pdo->query(sprintf(
+                'SELECT * FROM backend_users WHERE username = %s',
+                $pdo->quote($username)
+            ), PDO::FETCH_ASSOC);
+            $row = $res->fetch();
+            if($row) {
+                echo json_encode(array(
+                    'status' => 'Error',
+                    'message'=> 'Username is already exist!'
+                ));
+                exit();
+            }
+            $res = $pdo->exec(sprintf(
+                'INSERT INTO `backend_users` (`username`, `password`, `isadmin`) VALUES (%s, %s, %s)',
+                $pdo->quote($username),
+                $pdo->quote($password),
+                $pdo->quote(0)
+            )); 
+            echo json_encode(array(
+                'status' => 'Success',
+                'message'=> 'Add user success!'
+            ));
+        }
+    } 
 ?>

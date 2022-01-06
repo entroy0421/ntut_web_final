@@ -21,6 +21,18 @@
                 $pdo->quote($id),
                 $pdo->quote($hash)
             )); 
+
+            if($res == 1) {
+                echo json_encode(array(
+                    'status' => 'Success',
+                    'message'=> 'Success'
+                ));
+            } else {
+                echo json_encode(array(
+                    'status' => 'Error',
+                    'message'=> 'Something wrong!'
+                ));
+            }
         } else if ($hash != "" && $action == "delete") {
             $pdo = get_pdo();
             $res = $pdo->exec(sprintf(
