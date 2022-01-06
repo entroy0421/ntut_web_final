@@ -23,7 +23,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['user_id'] = $row['id'];
         $_SESSION['username'] = $row['username'];
         $_SESSION['isadmin'] = $row['isadmin'];
-        echo"<script>history.go(-1);</script>";  
+
+        $path = parse_url($_SERVER["HTTP_REFERER"])["path"];
+        if($path == "/backend/register.php") {
+            header('Location: ../index.php');
+        } else {
+            echo"<script>history.go(-1);</script>";  
+        }
         exit();
     }
 } else {
