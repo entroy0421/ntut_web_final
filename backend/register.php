@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         ), PDO::FETCH_ASSOC);
         $row = $res->fetch();
         if ($row) {
-            echo "<script>alert('Username is already exist!)</script>";
+            echo "<script>alert('Username is already exist!')</script>";
         } else {
             $res = $pdo->exec(sprintf(
                 'INSERT INTO `backend_users` (`username`, `password`, `isadmin`) VALUES (%s, %s, %s)',

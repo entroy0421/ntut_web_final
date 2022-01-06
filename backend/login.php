@@ -5,6 +5,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
     $pdo = get_pdo();
+    $wrong = 0;
+
 
     $res = $pdo->query(sprintf(
         'SELECT * FROM backend_users WHERE username = %s AND password = %s',
@@ -18,23 +20,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['isadmin'] = $row['isadmin'];
         $_SESSION["imageURL"] = $row['imageURL'];
         header('Location: /backend/index.php');
-        exit();
     } else if ($row && $row['username'] == $username && $row["isadmin"] == 0) {
         $_SESSION['user_id'] = $row['id'];
         $_SESSION['username'] = $row['username'];
-        $_SESSION['isadmin'] = $row['isadmin'];
-
-        $path = parse_url($_SERVER["HTTP_REFERER"])["path"];
-        if($path == "/backend/register.php") {
-            header('Location: ../index.php');
-        } else {
-            echo"<script>history.go(-1);</script>";  
-        }
-        exit();
+        $_SESSION['isadmin'] = $row['isadmin'];   
+        header('Location: ../../index.php');
+    } else {
+        $wrong = 1;
     }
 } else {
     if(isset($_SESSION['user_id'])) {
-        echo"<script>history.go(-1);</script>";  
+        header('Location: ../index.php');
     }
 }
 ?>
@@ -87,14 +83,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                                 </div>
 
-                                <div class="d-flex mb-5 align-items-center">
+                                <div class="d-flex mb-4 align-items-center">
                                     <label class="control control--checkbox mb-0"><span class="caption">Remember me</span>
                                         <input type="checkbox" checked="checked" />
                                         <div class="control__indicator"></div>
                                     </label>
                                     <span class="ml-auto"><a href="javascript:alert('If you forgot your password, just register one!')" class="forgot-pass">Forgot Password</a></span>
                                 </div>
-
+                                <?php if($wrong == 1) echo '<div class="mb-4" style="float: right;"><span class="ml-auto" style="color: red;">Wrong username or password!</span></div>';?>
                                 <input type="submit" value="Log In" class="btn btn-block btn-primary">
 
                                 <span class="d-block text-left my-4 text-muted" style="float: right;"><a href="/backend/register.php">&mdash; or register &mdash;</a></span>
