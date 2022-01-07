@@ -20,3 +20,18 @@ You can use all kinds of creativity to design this project, For examples: film r
 2. Design (25%) 
 3. Creativity (25%) 
 4. Difficulty (25%)
+
+## About Project
+* The project is a blog. Everybody are able to sign up on the website, and comment under each post, which posted by admin user. 
+* ONLY admin users can create/update/list/delete both posts and users. 
+* Vistors are ONLY allowed to sign up as user permission. 
+* Default admin user `admin:admin`
+* Default user user `guest:guest`
+* Enjoy the blog, although I think it's a terrible website :)
+
+### Usage
+* If you didn't install docker and docker-compose on your computer, just run the script `install_docker_and_docker_compose.sh`. Only if your OS is CentOS. 
+* Just run `docker-compose up --build --force-recreate --no-deps` and enjoy the blog on http://127.0.0.1:58080/
+
+### Demo Website
+> https://blog.entroy.tk/
