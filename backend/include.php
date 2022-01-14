@@ -8,7 +8,9 @@ if (!isset($_SESSION['user_id'])) {
         header('Location: /backend/login.php');
         exit();
     }
-} else if (isset($_SESSION["isadmin"]) && $_SESSION["isadmin"] == 0) {
+} 
+
+if (isset($_SESSION["isadmin"]) && $_SESSION["isadmin"] == 0) {
     header('Location: ../index.php');
     exit();
 }
