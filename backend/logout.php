@@ -1,6 +1,6 @@
 <?php
 
-require_once('include.php');
+require_once('../frontend/include.php');
 
 unset($_SESSION['user_id']);
 unset($_SESSION["username"]);
