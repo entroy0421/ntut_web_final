@@ -1,5 +1,9 @@
 <?php
 include('include.php');
+if (isset($_SESSION["isadmin"]) && $_SESSION["isadmin"] == 0) {
+    header('Location: ../index.php');
+    exit();
+}
 
 function xss_clean($data)
 {

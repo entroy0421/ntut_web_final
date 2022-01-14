@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <?php
 require_once('include.php');
+if (isset($_SESSION["isadmin"]) && $_SESSION["isadmin"] == 0) {
+    header('Location: ../index.php');
+    exit();
+}
 ?>
 <html class="loading" lang="en" data-textdirection="ltr">
 
