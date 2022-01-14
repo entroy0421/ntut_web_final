@@ -14,8 +14,8 @@ services:
         depends_on:
             - php
             - mysql
-        # environment:
-        #     - "VIRTUAL_HOST=blog.entroy.tk"
+        environment:
+            - "VIRTUAL_HOST=blog.entroy.tk"
 
     php:
         build:
@@ -43,7 +43,7 @@ services:
             MYSQL_PASSWORD: ac5d79638d4d8020309095b98819f35d29ca90affa61456a208313301805e4d8
         command: mysqld --max_statement_time=2
 
-# networks:
-#     default:
-#         external:
-#             name: bridge-network
+networks:
+    default:
+        external:
+            name: bridge-network
